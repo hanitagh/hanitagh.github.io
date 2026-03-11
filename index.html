@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanita Ghanta — Financial Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --gold: #b8953a;
+    --gold-light: #d4af6a;
+    --slate: #4a5568;
+    --rule: #d4cfc4;
+    --accent: #1a3a2a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245, 242, 236, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 6rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-name em { font-style: italic; color: var(--gold); }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--slate);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--slate);
+    max-width: 440px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+    border: 1px solid var(--accent);
+  }
+
+  .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    transition: all 0.25s;
+  }
+
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-seeking {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    background: rgba(26, 58, 42, 0.07);
+    border-left: 3px solid var(--gold);
+    padding: 0.65rem 1rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.75s forwards;
+  }
+
+  .nav-download {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold) !important;
+    border: 1px solid var(--gold);
+    padding: 0.3rem 0.8rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-download:hover {
+    background: var(--gold);
+    color: white !important;
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 4rem 4rem;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.6s forwards;
+  }
+
+  .hero-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 8px;
+    right: -8px; bottom: -8px;
+    border: 1px solid var(--gold);
+    z-index: -1;
+  }
+
+  /* PHOTO */
+  .photo-frame {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+
+  .photo-frame img.loaded { display: block; }
+
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    pointer-events: none;
+  }
+
+  .photo-placeholder svg { color: var(--rule); }
+
+  .photo-placeholder span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rule);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  #photo-input { display: none; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-item { border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-num span { color: var(--gold); }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.7rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    color: var(--slate);
+    text-transform: uppercase;
+  }
+
+  .tag.gold { background: var(--gold); color: white; border-color: var(--gold); }
+
+  .deco-line {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .deco-line::before {
+    content: '';
+    width: 1px;
+    height: 60px;
+    background: var(--rule);
+  }
+
+  section { padding: 6rem 4rem; position: relative; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .section-rule { flex: 1; height: 1px; background: var(--rule); margin-left: 1rem; }
+
+  #experience { background: var(--cream); }
+
+  .exp-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
+
+  .exp-sidebar { position: sticky; top: 7rem; height: fit-content; }
+
+  .exp-sidebar p {
+    color: var(--slate);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .exp-contact-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    cursor: default;
+  }
+
+  .exp-item:hover .exp-company { color: var(--gold); }
+
+  .exp-meta { padding-top: 0.3rem; }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--slate);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-location { font-size: 0.8rem; color: var(--slate); font-style: italic; }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    transition: color 0.2s;
+  }
+
+  .exp-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--slate);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  #projects { background: var(--paper); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .project-card:hover::after { width: 100%; }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    padding: 0.2rem 0.55rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .project-link:hover { background: var(--gold); color: white; }
+
+  .project-link.placeholder {
+    color: var(--rule);
+    border-color: var(--rule);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .project-desc { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+
+  .project-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
+
+  .project-tool {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--rule);
+    color: var(--slate);
+    text-transform: uppercase;
+  }
+
+  #skills { background: var(--accent); color: var(--paper); }
+  #skills .section-title { color: var(--paper); }
+  #skills .section-rule { background: rgba(255,255,255,0.15); }
+  #skills .section-num { color: var(--gold-light); }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+
+  .skill-category { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; }
+
+  .skill-cat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .skill-list li {
+    font-size: 0.88rem;
+    color: rgba(245, 242, 236, 0.75);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  #education { background: var(--cream); }
+
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  .edu-card { border: 1px solid var(--rule); padding: 2.5rem; background: var(--paper); position: relative; }
+
+  .edu-card.featured { border-color: var(--gold); }
+
+  .edu-card.featured::before {
+    content: 'MS Finance · STEM';
+    position: absolute;
+    top: -1px; right: 2rem;
+    background: var(--gold);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .edu-school {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .edu-degree { font-size: 0.9rem; color: var(--slate); margin-bottom: 1.5rem; line-height: 1.5; }
+
+  .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .edu-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.25rem 0.7rem;
+  }
+
+  .certs-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; }
+
+  .cert-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  .cert-pill::before { content: '✦'; color: var(--gold); font-size: 0.7rem; }
+
+  /* CERTIFICATIONS SECTION */
+  #certifications { background: var(--paper); }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  .cert-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cert-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  }
+
+  .cert-issuer {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+
+  .cert-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .cert-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--slate);
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cert-view {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    padding: 0.15rem 0.5rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .cert-view:hover { background: var(--gold); color: white; }
+
+  .cert-view.no-link {
+    color: var(--rule);
+    border-color: var(--rule);
+    pointer-events: none;
+  }
+
+  .cert-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.4rem;
+  }
+
+  .cert-skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.45rem;
+    border: 1px solid var(--rule);
+    color: var(--slate);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  #contact {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 8rem 4rem;
+  }
+
+  .contact-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .contact-heading em { font-style: italic; color: var(--gold); }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: rgba(245, 242, 236, 0.6);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.85rem 2rem;
+    transition: all 0.25s;
+  }
+
+  .contact-link:hover { background: var(--gold); border-color: var(--gold); }
+
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(245, 242, 236, 0.3);
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; padding: 6rem 0 2rem; }
+    .hero-left { padding: 2rem 1.5rem; }
+    .hero-right { padding: 2rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .deco-line { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">HG</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="CV.pdf" download class="nav-download">↓ Resume</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Financial Analyst · CFA Level I Candidate</p>
+    <h1 class="hero-name">Hanita<br><em>Ghanta</em></h1>
+    <p class="hero-title">Modelling, Risk & Quantitative Finance</p>
+    <p class="hero-desc">
+      Finance has always been where my curiosity lives — I love finding the story inside the numbers. 
+      With a STEM MS in Quantitative Finance and hands-on experience across risk analysis, FP&A, and 
+      financial modelling, I build models that don't just output answers but help people make better decisions.
+    </p>
+    <p class="hero-seeking">
+      🎯 Seeking financial modelling, FP&A, or risk analyst roles in the US — available immediately.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+      <a href="CV.pdf" download class="btn-secondary">↓ Download Resume</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <input type="file" id="photo-input" accept="image/*">
+      <label for="photo-input">
+        <div class="photo-frame" title="Click to upload your photo">
+          <img id="profile-photo" src="" alt="Hanita Ghanta">
+          <div class="photo-placeholder" id="photo-placeholder">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Upload<br>Photo</span>
+          </div>
+        </div>
+      </label>
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-num">2<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3.<span>8</span></div>
+          <div class="stat-label">MS GPA · UB</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">8<span>+</span></div>
+          <div class="stat-label">Finance Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label">Tools Mastered</div>
+        </div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag gold">Excel Advanced</span>
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Bloomberg</span>
+        <span class="tag">DCF</span>
+        <span class="tag">Scenario Analysis</span>
+        <span class="tag">Power BI</span>
+      </div>
+    </div>
+    <p class="deco-line">Chicago, IL · Open to Opportunities in the USA</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="exp-grid">
+    <div class="exp-sidebar reveal">
+      <p>From graduate teaching to corporate risk analysis, my experience spans academia and industry — building models, mentoring peers, and owning financial processes end-to-end.</p>
+    </div>
+
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Jan 2024 — Jan 2026</div>
+          <div class="exp-location">Buffalo, NY</div>
+        </div>
+        <div>
+          <div class="exp-company"><a href="https://www.buffalo.edu" target="_blank" style="color:inherit;text-decoration:none;">University at Buffalo, SUNY</a></div>
+          <div class="exp-role">Teaching Assistant & ML Research Assistant</div>
+          <ul class="exp-bullets">
+            <li>TA for Experiential Projects in Finance (MGF 645) — guided graduate students through real-world financial analysis and modelling projects</li>
+            <li>Mentored students on applied finance concepts, model building, and investment analysis frameworks</li>
+            <li>Supported ML research, applying quantitative methods to financial datasets and contributing to research outputs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Jul 2023 — Jun 2024</div>
+          <div class="exp-location">AP, India</div>
+        </div>
+        <div>
+          <div class="exp-company"><a href="https://www.somanyceramics.com/" target="_blank" style="color:inherit;text-decoration:none;">Sudha-Somany Ceramics</a></div>
+          <div class="exp-role">Financial Risk Analyst</div>
+          <ul class="exp-bullets">
+            <li>Monitored $300K–$500K monthly cash flows, identifying liquidity risks and transaction exceptions</li>
+            <li>Conducted portfolio-level credit exposure analysis across 20+ counterparties</li>
+            <li>Built Excel dashboards tracking 10+ KPIs — improved risk visibility by 30%</li>
+            <li>Daily reconciliation of receivables, cash activity, and transaction validation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Jan 2023 — Jun 2023</div>
+          <div class="exp-location">Chennai, India</div>
+        </div>
+        <div>
+          <div class="exp-company"><a href="https://www.ramco.com" target="_blank" style="color:inherit;text-decoration:none;">Ramco Systems</a></div>
+          <div class="exp-role">Financial Analyst Intern</div>
+          <ul class="exp-bullets">
+            <li>Analyzed 10,000+ invoice records per cycle, identifying transaction-level breaks</li>
+            <li>Used Celonis EMS to proactively detect control gaps impacting compliance and cycle time</li>
+            <li>Extracted and validated large datasets via SQL for KPI and operational reporting</li>
+            <li>Improved cross-functional reporting accuracy by 18%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">May 2022 — Nov 2022</div>
+          <div class="exp-location">Remote, India</div>
+        </div>
+        <div>
+          <div class="exp-company"><a href="https://www.predictram.com" target="_blank" style="color:inherit;text-decoration:none;">PredictRAM</a></div>
+          <div class="exp-role">Financial Research Analyst Intern</div>
+          <ul class="exp-bullets">
+            <li>Built Python-based scenario models analyzing downside risk across 15–20 listed companies</li>
+            <li>Applied statistical techniques to identify key risk drivers across multi-year datasets</li>
+            <li>Delivered written risk summaries translating quantitative outputs into investment insights</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 01 · Sep–Dec 2025 · UB</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">Multi-Asset Portfolio Construction, Risk Decomposition & Strategy Analysis</div>
+      <p class="project-desc">Built and analyzed a diversified multi-asset portfolio spanning equities, fixed income, private equity, hedge funds, infrastructure, and cash. Determined asset weights using expected returns, volatility, and correlation assumptions. Decomposed portfolio risk to understand each asset's contribution to total volatility, assess diversification effectiveness, and evaluate risk-return trade-offs under different market conditions.</p>
+      <div class="project-tools">
+        <span class="project-tool">Asset Allocation</span><span class="project-tool">Risk Decomposition</span><span class="project-tool">Portfolio Management</span><span class="project-tool">Quantitative Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 02 · Aug–Sep 2025</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">AI-Assisted Financial Dashboard & Market Insights</div>
+      <p class="project-desc">Built a dynamic Excel-based financial dashboard using AI-assisted tools to analyze valuation metrics across Technology, Pharma, and Energy sectors. Applied prompt engineering to generate automated earnings summaries and identify valuation trends, meaningfully improving financial analysis efficiency.</p>
+      <div class="project-tools">
+        <span class="project-tool">Excel</span><span class="project-tool">AI Tools</span><span class="project-tool">Prompt Engineering</span><span class="project-tool">Market Analysis</span><span class="project-tool">Financial Dashboards</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 03 · Feb–May 2025 · UB</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">Supervised Equity Portfolio Management & Performance Analysis</div>
+      <p class="project-desc">Managed an 80-day simulated equity portfolio under CFA investment principles. Developed investment strategy, conducted security valuation and risk assessment, and monitored performance vs. the S&P 500. Achieved a <strong>+0.58% return relative to S&P 500</strong> with documented strategy and performance attribution covering asset allocation, valuation rationale, and risk metrics.</p>
+      <div class="project-tools">
+        <span class="project-tool">Portfolio Management</span><span class="project-tool">Equity Valuation</span><span class="project-tool">CFA Framework</span><span class="project-tool">Performance Attribution</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 04 · Feb–Mar 2025 · UB</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">M&A Analysis & Acquisition Recommendation — M&T Bank & Fulton Bank</div>
+      <p class="project-desc">Conducted a full strategic and financial M&A analysis evaluating Fulton Bank as a potential acquisition target for M&T Bank. Assessed strategic fit, geographic expansion benefits, and revenue synergies. Analyzed financial statements, valuation metrics, and key banking ratios to evaluate deal feasibility, capital adequacy impact, and post-merger risk. Presented a formal acquisition recommendation supported by financial analysis and risk assessment.</p>
+      <div class="project-tools">
+        <span class="project-tool">M&A Analysis</span><span class="project-tool">DCF</span><span class="project-tool">Comps</span><span class="project-tool">Accretion-Dilution</span><span class="project-tool">Banking Ratios</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 05 · Nov 2025 · UB</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">Cash Flow & Scenario Analysis</div>
+      <p class="project-desc">Built Excel-based cash flow models using 5 years of historical operating data from Yahoo Finance, standardized across multiple companies. Constructed downside scenarios to evaluate liquidity sensitivity and produced variance summaries that improved model accuracy and interpretability.</p>
+      <div class="project-tools">
+        <span class="project-tool">Excel</span><span class="project-tool">Scenario Analysis</span><span class="project-tool">Liquidity Modeling</span><span class="project-tool">Variance Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 06 · UB</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">Fixed Income & Interest Rate Risk Analysis</div>
+      <p class="project-desc">Yield curve analysis using Python and Excel to assess duration, convexity, and IRR impacts on fixed income portfolios. Analyzed rate movements to quantify interest rate sensitivity and risk exposure across portfolio positions.</p>
+      <div class="project-tools">
+        <span class="project-tool">Python</span><span class="project-tool">Excel</span><span class="project-tool">Duration</span><span class="project-tool">Convexity</span><span class="project-tool">IRR</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 07 · Oct–Dec 2024 · UB</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">Currency Correlation & FX Risk Analysis — BRICS vs USD</div>
+      <p class="project-desc">Developed a Python program to analyze correlations between BRICS currencies and the US dollar using historical FX data. Applied the Isolation Forest ML algorithm to detect anomalies in forex market data, highlighting periods of unusual currency behavior tied to macroeconomic stress or market dislocations — interpreted in the context of FX risk management and globally exposed portfolios.</p>
+      <div class="project-tools">
+        <span class="project-tool">Python</span><span class="project-tool">Isolation Forest</span><span class="project-tool">FX Risk</span><span class="project-tool">Anomaly Detection</span><span class="project-tool">Correlation Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">Project 08 · Oct–Nov 2023 · Manipal</div>
+        <a href="#" class="project-link placeholder">↗ View</a>
+      </div>
+      <div class="project-title">Stock Trend Regression & CAPM Analysis — Tata Consultancy Services</div>
+      <p class="project-desc">Conducted a regression-based equity analysis of TCS to evaluate the relationship between stock returns and market movements. CAPM results produced a beta of 1.2, indicating above-market sensitivity. A correlation coefficient of 0.85 confirmed strong co-movement with the benchmark — findings interpreted to understand systematic risk exposure from an investor's perspective.</p>
+      <div class="project-tools">
+        <span class="project-tool">Regression Analysis</span><span class="project-tool">CAPM</span><span class="project-tool">Python</span><span class="project-tool">Equity Analysis</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Modelling & Analysis</div>
+      <ul class="skill-list">
+        <li>Excel (Advanced)</li>
+        <li>DCF Valuation</li>
+        <li>Scenario & Sensitivity Analysis</li>
+        <li>Cash Flow Modelling</li>
+        <li>Variance Analysis</li>
+        <li>Three-Statement Models</li>
+      </ul>
+    </div>
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Programming & Data</div>
+      <ul class="skill-list">
+        <li>Python (NumPy, Pandas, SciPy)</li>
+        <li>SQL</li>
+        <li>MATLAB</li>
+        <li>Power BI</li>
+        <li>Tableau</li>
+        <li>GitHub</li>
+      </ul>
+    </div>
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Finance & Risk</div>
+      <ul class="skill-list">
+        <li>Credit Risk Analysis</li>
+        <li>Liquidity Risk</li>
+        <li>FP&A / Budgeting</li>
+        <li>Capital Markets</li>
+        <li>M&A Analysis</li>
+        <li>IRR / NPV</li>
+      </ul>
+    </div>
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Tools & Platforms</div>
+      <ul class="skill-list">
+        <li>Bloomberg Terminal</li>
+        <li>Celonis EMS</li>
+        <li>Google Sheets</li>
+        <li>XLOOKUP / SUMIFS</li>
+        <li>Pivot Tables</li>
+        <li>Power Query</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card featured reveal">
+      <div class="edu-school">University at Buffalo, SUNY</div>
+      <div class="edu-degree">Master of Science in Finance, Quantitative Finance · STEM Designated</div>
+      <div class="edu-meta">
+        <span class="edu-badge">GPA 3.8 / 4.0</span>
+        <span class="edu-badge">Graduated Jan 2026</span>
+        <span class="edu-badge">Teaching Assistant</span>
+        <span class="edu-badge">ML Research Assistant</span>
+      </div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-school">Manipal Academy of Higher Education</div>
+      <div class="edu-degree">Bachelor of Business Administration, Finance</div>
+      <div class="edu-meta">
+        <span class="edu-badge">India</span>
+        <span class="edu-badge">Finance Major</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="certs-row reveal">
+    <div class="cert-pill">CFA Level I Candidate (Ongoing)</div>
+    <div class="cert-pill">Bloomberg Markets Concepts Certification</div>
+    <div class="cert-pill">CME Trading — Options & Futures</div>
+    <div class="cert-pill">Celonis Platform — Intermediate Level</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cert-grid">
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Saïd Business School · University of Oxford</div>
+      <div class="cert-name">AI Fundamentals in Financial Services</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">AI in Finance</span>
+        <span class="cert-skill-tag">Financial Services</span>
+      </div>
+      <div class="cert-date">
+        <span>Feb 2026 · ID: Z53ZEMT82ZVN</span>
+        <a href="https://www.credential.net/Z53ZEMT82ZVN" target="_blank" class="cert-view">↗ View</a>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Udemy</div>
+      <div class="cert-name">Claude AI for Finance</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Claude AI</span>
+        <span class="cert-skill-tag">AI for Finance</span>
+      </div>
+      <div class="cert-date">
+        <span>Feb 2026</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Forage</div>
+      <div class="cert-name">Goldman Sachs — Risk Job Simulation</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Risk Management</span>
+      </div>
+      <div class="cert-date">
+        <span>Nov 2025 · ID: edQ98SZ3hEZLLaLxy</span>
+        <a href="https://www.theforage.com/achievements" target="_blank" class="cert-view">↗ View</a>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">LinkedIn</div>
+      <div class="cert-name">Copilot in Excel: AI-Powered Financial Planning & Analysis</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">AI for Business</span>
+        <span class="cert-skill-tag">FP&A</span>
+      </div>
+      <div class="cert-date">
+        <span>Sep 2025</span>
+        <a href="https://www.linkedin.com/in/hanita-ghanta/details/certifications/" target="_blank" class="cert-view">↗ View</a>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">LinkedIn</div>
+      <div class="cert-name">Copilot in Excel: Supercharge Your Financial Modeling</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Excel</span>
+        <span class="cert-skill-tag">Microsoft Copilot</span>
+      </div>
+      <div class="cert-date">
+        <span>Jul 2025</span>
+        <a href="https://www.linkedin.com/in/hanita-ghanta/details/certifications/" target="_blank" class="cert-view">↗ View</a>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Bloomberg</div>
+      <div class="cert-name">Bloomberg Market Concepts Certification</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Bloomberg Terminal</span>
+        <span class="cert-skill-tag">Trading Systems</span>
+      </div>
+      <div class="cert-date">
+        <span>May 2025</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">CME Group</div>
+      <div class="cert-name">Understanding the Benefits of Futures</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">FX Derivatives</span>
+        <span class="cert-skill-tag">Futures Trading</span>
+      </div>
+      <div class="cert-date">
+        <span>Sep 2025</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">CME Group</div>
+      <div class="cert-name">Introduction to Futures</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Futures</span>
+        <span class="cert-skill-tag">Derivatives</span>
+      </div>
+      <div class="cert-date">
+        <span>Sep 2025</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">CME Group</div>
+      <div class="cert-name">Introduction to Options</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Options</span>
+        <span class="cert-skill-tag">FX Trading</span>
+      </div>
+      <div class="cert-date">
+        <span>Sep 2025</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">CME Group</div>
+      <div class="cert-name">Things to Know Before Trading CME Group Futures</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Derivatives Trading</span>
+        <span class="cert-skill-tag">Currency Futures</span>
+      </div>
+      <div class="cert-date">
+        <span>Sep 2025</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">LinkedIn</div>
+      <div class="cert-name">Corporate Financial Statement Analysis</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Financial Statement Analysis</span>
+      </div>
+      <div class="cert-date">
+        <span>Jan 2026</span>
+        <a href="https://www.linkedin.com/in/hanita-ghanta/details/certifications/" target="_blank" class="cert-view">↗ View</a>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">Celonis</div>
+      <div class="cert-name">Building Analysis on Celonis EMS Platform</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">Process Mining</span>
+        <span class="cert-skill-tag">Celonis EMS</span>
+      </div>
+      <div class="cert-date">
+        <span>Apr 2023</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+    <div class="cert-card reveal">
+      <div class="cert-issuer">University at Buffalo</div>
+      <div class="cert-name">Finance Academy</div>
+      <div class="cert-skills">
+        <span class="cert-skill-tag">M&A</span>
+        <span class="cert-skill-tag">Valuation</span>
+        <span class="cert-skill-tag">Financial Modeling</span>
+      </div>
+      <div class="cert-date">
+        <span>May 2025</span>
+        <span class="cert-view no-link">↗ View</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <p class="contact-eyebrow">Based in Chicago, IL · Open to Opportunities Across the USA</p>
+  <h2 class="contact-heading">Let's work<br><em>together.</em></h2>
+  <p class="contact-sub">
+    Actively seeking financial modelling, risk, and FP&A roles across the United States. 
+    Ready to contribute, learn fast, and make a real impact. Let's connect.
+  </p>
+  <div class="contact-links">
+    <a href="/cdn-cgi/l/email-protection#dbb3bab5b2afbabcb3bab5afba9bbcb6bab2b7f5b8b4b6" class="contact-link">Email Me</a>
+    <a href="https://www.linkedin.com/in/hanita-ghanta" target="_blank" class="contact-link">LinkedIn</a>
+    <a href="tel:+13129959604" class="contact-link">+1 (312) 995-9604</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Hanita Ghanta</p>
+  <p>Financial Analyst · Chicago, IL · Open to Opportunities Across the USA</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Photo upload
+  const photoInput = document.getElementById('photo-input');
+  const profilePhoto = document.getElementById('profile-photo');
+  const photoPlaceholder = document.getElementById('photo-placeholder');
+
+  if (photoInput) {
+    photoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        profilePhoto.src = ev.target.result;
+        profilePhoto.c
