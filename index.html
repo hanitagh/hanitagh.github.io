@@ -722,7 +722,7 @@
     white-space: nowrap;
   }
 
-  .cert-view:hover { background: var(--gold); color: white; }
+  .cert-view { cursor: pointer; }
 
   .cert-view.no-link {
     color: var(--rule);
@@ -1048,7 +1048,7 @@
         </div>
         <div>
           <div class="exp-company"><a href="https://www.somanyceramics.com/" target="_blank" style="color:inherit;text-decoration:none;">Sudha-Somany Ceramics</a></div>
-          <div class="exp-role">Financial Analyst</div>
+          <div class="exp-role">Financial Risk Analyst</div>
           <ul class="exp-bullets">
             <li>Monitored $300K–$500K monthly cash flows, identifying liquidity risks and transaction exceptions</li>
             <li>Conducted portfolio-level credit exposure analysis across 20+ counterparties</li>
@@ -1275,7 +1275,6 @@
         <span class="edu-badge">GPA 3.8 / 4.0</span>
         <span class="edu-badge">Graduated Jan 2026</span>
         <span class="edu-badge">Teaching Assistant</span>
-        <span class="edu-badge">ML Research Assistant</span>
       </div>
     </div>
 
@@ -1297,11 +1296,11 @@
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
+<!-- CERTIFICATES -->
 <section id="certifications">
   <div class="section-header reveal">
     <span class="section-num">05</span>
-    <h2 class="section-title">Certifications</h2>
+    <h2 class="section-title">Certificates</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1315,8 +1314,8 @@
         <span class="cert-skill-tag">Financial Services</span>
       </div>
       <div class="cert-date">
-        <span>Feb 2026 · ID: Z53ZEMT82ZVN</span>
-        <a href="https://www.credential.net/Z53ZEMT82ZVN" target="_blank" class="cert-view">↗ View</a>
+        <span>Feb 2026</span>
+        <span class="cert-view" onclick="showCert('cert-oxford.png', 'AI Fundamentals in Financial Services')">↗ View</span>
       </div>
     </div>
 
@@ -1329,7 +1328,7 @@
       </div>
       <div class="cert-date">
         <span>Feb 2026</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-udemy.png', 'Claude AI for Finance')">↗ View</span>
       </div>
     </div>
 
@@ -1346,32 +1345,6 @@
     </div>
 
     <div class="cert-card reveal">
-      <div class="cert-issuer">LinkedIn</div>
-      <div class="cert-name">Copilot in Excel: AI-Powered Financial Planning & Analysis</div>
-      <div class="cert-skills">
-        <span class="cert-skill-tag">AI for Business</span>
-        <span class="cert-skill-tag">FP&A</span>
-      </div>
-      <div class="cert-date">
-        <span>Sep 2025</span>
-        <a href="https://www.linkedin.com/in/hanita-ghanta/details/certifications/" target="_blank" class="cert-view">↗ View</a>
-      </div>
-    </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-issuer">LinkedIn</div>
-      <div class="cert-name">Copilot in Excel: Supercharge Your Financial Modeling</div>
-      <div class="cert-skills">
-        <span class="cert-skill-tag">Excel</span>
-        <span class="cert-skill-tag">Microsoft Copilot</span>
-      </div>
-      <div class="cert-date">
-        <span>Jul 2025</span>
-        <a href="https://www.linkedin.com/in/hanita-ghanta/details/certifications/" target="_blank" class="cert-view">↗ View</a>
-      </div>
-    </div>
-
-    <div class="cert-card reveal">
       <div class="cert-issuer">Bloomberg</div>
       <div class="cert-name">Bloomberg Market Concepts Certification</div>
       <div class="cert-skills">
@@ -1380,7 +1353,7 @@
       </div>
       <div class="cert-date">
         <span>May 2025</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-bloomberg.png', 'Bloomberg Market Concepts')">↗ View</span>
       </div>
     </div>
 
@@ -1393,7 +1366,7 @@
       </div>
       <div class="cert-date">
         <span>Sep 2025</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-cme-benefits.png', 'Understanding the Benefits of Futures')">↗ View</span>
       </div>
     </div>
 
@@ -1406,7 +1379,7 @@
       </div>
       <div class="cert-date">
         <span>Sep 2025</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-cme-intro-futures.png', 'Introduction to Futures')">↗ View</span>
       </div>
     </div>
 
@@ -1419,7 +1392,7 @@
       </div>
       <div class="cert-date">
         <span>Sep 2025</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-cme-options.png', 'Introduction to Options')">↗ View</span>
       </div>
     </div>
 
@@ -1432,19 +1405,7 @@
       </div>
       <div class="cert-date">
         <span>Sep 2025</span>
-        <span class="cert-view no-link">↗ View</span>
-      </div>
-    </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-issuer">LinkedIn</div>
-      <div class="cert-name">Corporate Financial Statement Analysis</div>
-      <div class="cert-skills">
-        <span class="cert-skill-tag">Financial Statement Analysis</span>
-      </div>
-      <div class="cert-date">
-        <span>Jan 2026</span>
-        <a href="https://www.linkedin.com/in/hanita-ghanta/details/certifications/" target="_blank" class="cert-view">↗ View</a>
+        <span class="cert-view" onclick="showCert('cert-cme-trading.png', 'Things to Know Before Trading CME Futures')">↗ View</span>
       </div>
     </div>
 
@@ -1457,7 +1418,7 @@
       </div>
       <div class="cert-date">
         <span>Apr 2023</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-celonis.png', 'Building Analysis on Celonis EMS')">↗ View</span>
       </div>
     </div>
 
@@ -1471,12 +1432,23 @@
       </div>
       <div class="cert-date">
         <span>May 2025</span>
-        <span class="cert-view no-link">↗ View</span>
+        <span class="cert-view" onclick="showCert('cert-ub-finance.png', 'Finance Academy — University at Buffalo')">↗ View</span>
       </div>
     </div>
 
   </div>
 </section>
+
+<!-- CERTIFICATE MODAL -->
+<div id="cert-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9000; display:none; align-items:center; justify-content:center; padding:2rem;" onclick="closeCert()">
+  <div style="max-width:800px; width:100%; position:relative;" onclick="event.stopPropagation()">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <p id="cert-modal-title" style="font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#d4cfc4;"></p>
+      <button onclick="closeCert()" style="background:none; border:1px solid #d4cfc4; color:#d4cfc4; font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.4rem 0.8rem; cursor:pointer;">✕ Close</button>
+    </div>
+    <img id="cert-modal-img" src="" alt="Certificate" style="width:100%; border:1px solid #333; display:block;">
+  </div>
+</div>
 
 </section>
 
@@ -1595,6 +1567,23 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
+
+  function showCert(filename, title) {
+    document.getElementById('cert-modal-img').src = filename;
+    document.getElementById('cert-modal-title').textContent = title;
+    const modal = document.getElementById('cert-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCert() {
+    document.getElementById('cert-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCert();
+  });
 </script>
 </body>
 </html>
